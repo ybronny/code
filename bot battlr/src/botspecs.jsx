@@ -1,22 +1,48 @@
+import React from "react";
 
-import React from 'react';
-import bot from "../src/db.json"
-
-
-const BotSpecs = ({ enlistBot }) => {
-
-
-  const handleEnlist = () => {
-    enlistBot(bot);
-    
-  };
-
+function BotCard({
+  name,
+  catchphrase,
+  health,
+  damage,
+  armor,
+  avatar_url,
+  id,
+  setSelectedBot,
+  selectedBot,
+}) {
+  function handleClick() {
+    if (!selectedBot.find((bot) => bot.id === id)) {
+      setSelectedBot([
+        ...selectedBot,
+        {
+          id: id,
+          name: name,
+          health: health,
+          damage: damage,
+          armor: armor,
+          avatar_url: avatar_url,
+          catchphrase: catchphrase,
+        },
+      ]);
+    }
+  }
   return (
-    <div>
-      
-      <button onClick={handleEnlist}>Enlist</button>
-    </div>
+    <>
+      <div onClick={handleClick}>
+        <img src={avatar_url} alt="BOT POWER"/>
+        <div >
+          <div >{name}</div>
+          <p >{catchphrase}</p>
+        </div>
+        <div >
+          <span >{health}</span>
+          <span > {damage} </span>
+          <span >{armor}</span>
+        </div>
+      </div>
+    </>
   );
-};
+}
 
-export default BotSpecs;
+export default BotCard;

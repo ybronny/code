@@ -1,30 +1,21 @@
-import React from 'react';
-import bot from "./db.json"
+import BotCard from "./botspecs";
 
+function YourBotArmy({ Bot }) {
+  function handleClick() {
+    const update = selectedBot.filter((bot) => bot.id !== id);
+    console.log(update);
+  }
+  if (selectedBot.length !== 0) {
+    return (
+      <div >
+        <div onClick={(e) => console.log(e.target)} >
+          {Bot.map((bot) => (
+            <BotCard key={bot.id} {...bot} />
+          ))}
+        </div>
+      </div>
+    );
+  }
+}
 
-const handleReleaseClick = () => {
-    releaseBot(bot.id);
-  };
-
-  const handleDischargeClick = () => {
-    dischargeBot(bot.id);
-  };
-
-
-const BotProfile = ({ }) => {
-  return (
-    <div class="card" style="width: 18rem;">
-      <h3>{bot.name}</h3>
-      <p>Health: {bot.health}</p>
-      <p>Damage: {bot.damage}</p>
-      <p>Armor: {bot.armor}</p>
-      <p>image: {bot.avater_url}</p>
-      <p>catchphrase:{bot.catchphrase}</p>
-
-      <button onClick={handleReleaseClick}>Release</button>
-      <button onClick={handleDischargeClick}>Discharge</button>
-    </div>
-
-  )};
-  
-export default BotProfile;
+export default YourBotArmy;
