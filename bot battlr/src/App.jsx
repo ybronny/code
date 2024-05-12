@@ -1,21 +1,28 @@
-import React, { useEffect, useState } from "react";
-import Army from "../src/YourBotArmy";
-import Collect from "../src/botcollection";
+import React, { useState, useEffect } from "react";
+import BotCollection from "../src/botcollection";
 
 function App() {
-  const [bots, setBots] = useState([]);
-  const [Bot, SelectedBot] = useState([]);
+  const [botsData, setBotsData] = useState([]);
 
   useEffect(() => {
-    fetch("https://drive.google.com/file/d/157IfYxr4Bp63-ByF1g1wCP1uOpQ5i2R4/view")
-      .then((res) => res.json())
-      .then((data) => setBots(data));
-  }, []); 
+    
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/bots");
+        const data = await response.json();
+        setBotsData(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div>
-      <Army Bot={Bot} />
-      <Collect Data={bots} SelectedBot={SelectedBot} Bot={Bot} />
+      <h1>Bots Assembled</h1>
+      <BotCollection botsData={botsData} />
     </div>
   );
 }

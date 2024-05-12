@@ -1,19 +1,10 @@
-
-import React from 'react';
-import Info from "./YourBotArmy.jsx"
-import Specs from "../src/botspecs.jsx"
-import Profile from "../src/botcollection.jsx"
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
 
 
-const main= () => {
-
-return (
-  <div>
-    <Info/>
-    <Specs/>
-    <Profile />
-</div>
-)};
-  
-
-export default main;
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
